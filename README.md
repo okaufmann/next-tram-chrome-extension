@@ -12,7 +12,7 @@ This extension for Switzerland shows you how many minutes until your next public
 ## Deps
 
 JS & CSS:
-- [AngularJS](http://angularjs.com) [GitHub](https://github.com/angular/angular.js)
+- [AngularJS](https://angularjs.org/) [GitHub](https://github.com/angular/angular.js)
 - [Bootstrap](http://getbootstrap.com) [GitHub](https://github.com/twbs/bootstrap)
 - [MomentJS](http://momentjs.com/) [GitHub](https://github.com/moment/moment/)
 - [UI Bootstrap](http://angular-ui.github.io/bootstrap/) [GitHub](https://github.com/angular-ui/bootstrap)
