@@ -8,3 +8,5 @@ This extension for Switzerland shows you how many minutes until your next public
 Just install the newest Version from the Chrome Webstore:
 
 https://chrome.google.com/webstore/detail/next-tram/nfmokdcjdjamfmkanlcpbikfomajcoli
+
+![Screenshot](https://raw.githubusercontent.com/mighty-code/next-tram-chrome-extension/master/screens/screenshot.png)
