@@ -4,7 +4,7 @@
   "name": "Next Tram by Mighty Code",
   "short_name": "Next Tram",
   "description": "Shows next Tram on a connection you defined",
-  "version": "1.1",
+  "version": "1.1.1",
   "homepage_url": "https://github.com/mighty-code/next-tram-chrome-extension",
   "browser_action": {
     "default_title": "Next Tram",
