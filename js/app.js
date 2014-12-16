@@ -1,0 +1,1 @@
+var nextTramApp = angular.module('NextTram', ['NextTramOpenDataService']);

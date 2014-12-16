@@ -1,0 +1,29 @@
+{
+  "manifest_version": 2,
+
+  "name": "Next Tram by Mighty Code",
+  "short_name": "Next Tram",
+  "description": "Shows next Tram on a connection you defined",
+  "version": "1.1",
+  "homepage_url": "http://mighty-code.com",
+  "browser_action": {
+    "default_title": "Next Tram",
+    "default_icon": "images/icon.png",
+    "default_popup": "popup.html"
+  },
+  "icons": { "48": "images/icon_48.png", "128": "images/icon_128.png" },
+  "background": {
+    "page":"background.html"
+  },
+  "options_page": "options.html",
+  "permissions": [
+    "http://transport.opendata.ch/",
+    "background",
+    "alarms",
+    "http://*/*", 
+    "https://*/*",
+    "notifications",
+    "unlimitedStorage"
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'"
+}

@@ -1,0 +1,76 @@
+<!doctype html>
+<html ng-app="NextTramOptions" ng-csp>
+  <head>
+    <title>Getting Started Extension's Popup</title>
+     <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+     <link rel="stylesheet" type="text/css" href="css/main.css">
+     <style >
+     	.nav, .pagination, .carousel, .panel-title a { cursor: pointer; }
+     	ul.ng-hide{
+     		display: none !important;
+     	}
+     </style>
+  </head>
+  <body>
+	<div class="container"  ng-controller="OptionsController">
+		<div class="row">
+			<div class="col-md-12">
+				<h1 class="page-header">Next Tram <small>Options</small></h1>
+
+				<p>Add the Connection you want to watch. </p>
+
+				<!-- <p>
+					<button class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span> New Connection</button>
+				</p>-->
+
+				<div class="row">
+					<div class="col-md-6">
+						<form novalidate name="connection_form" ng-submit="saveConnection()" >
+							<div class="form-group">
+						     	<input type="text" class="form-control" name="options_connection_from" 
+						     	ng-model="options.connection.from"
+						     	placeholder="From" 
+						     	typeahead="station for station in getStation($viewValue)" 
+						     	typeahead-wait-ms="100" required >
+						     	<span ng-show="connection_form.options_connection_from.$invalid" class="help-block">required</span>
+							  </div>
+							  <div class="form-group">
+							    <input type="text" class="form-control" name="options_connection_to" placeholder="To" 
+							    ng-model="options.connection.to" 
+						     	typeahead="station for station in getStation($viewValue)" 
+						     	typeahead-wait-ms="100" required>
+						     	<span ng-show="connection_form.options_connection_to.$invalid" class="help-block">
+						     	required</span>
+							  </div>
+							  <!-- <div class="form-group">
+							    <input type="number" class="form-control" name="options_time_offset" placeholder="Time offset in minutes" 
+							    ng-model="options.time_offset" >
+						     	<span ng-show="connection_form.options_time_offset.$invalid" class="help-block">
+						     	must be a number</span>
+							  </div>-->
+							  
+							  <!-- <div class="form-group">
+							    <select type="text" class="form-control" id="product" placeholder="Product">
+									<option value="">--- no product ---</option>
+							    </select>
+							  </div>-->
+							  <div class="form-group">
+							      <button ng-disabled="connection_form.$invalid" type="submit" class="btn btn-default">Save</button>
+							      <span class="help-block">It can take some time till the connections will shown</span>
+							  </div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+    <script src="lib/angular.min.js"></script>
+    <script src="lib/ui-bootstrap-tpls-0.12.0.min.js"></script>
+    <script src="lib/moment-locales-2.8.4.min.js"></script>
+    <script src="js/services/OpenDataService.js"></script>
+    <script src="js/appOptions.js"></script>
+    <script src="js/options.js"></script>
+  </body>
+</html>
+

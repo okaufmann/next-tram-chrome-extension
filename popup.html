@@ -1,0 +1,61 @@
+<!doctype html>
+<html ng-app="NextTram" ng-csp>
+  <head>
+    <title>Next Tram</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/main.css">
+  </head>
+  <body>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="configuration pull-right">
+            <a href="options.html" target="_blank">options <span class="glyphicon glyphicon-wrench"></span></a> 
+          </div>
+          <h3 class="page-header">Next Tram</h3>
+          <div ng-controller="PageController">
+            <div ng-hide="setupRequired">
+              <p>
+                <b>From:</b> {{optionsFrom}}<br/>
+                <b>To:</b> {{optionsTo}}<br/>
+              </p>
+              <div class="well">
+                Next in <b>{{nextConnText}}</b> ({{nextConnection.from.departure| date:'dd.MM.yyyy: HH:mm'}})<br/>
+                with <b>{{nextConnectionSectionCategory}}</b>
+              </div>
+
+              <p>
+                <b>Further connections:</b>
+              </p>
+              <table class="table table-striped table-condensed table-responsive">
+                <thead>
+                  <th>Departure</th>
+                  <th>Product</th>
+                </thead>
+                <tbody>
+                  <tr ng-repeat="connection in connections track by $index">
+                    <td>{{connection.from.departure| date:'dd.MM.yyyy HH:mm'}}</td>
+                    <td>{{connection.sections[0].journey.name.replace(connection.sections[0].journey.number, "").trim()}}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="alert alert-info" ng-show="setupRequired">
+              No connection set up. Please go to <a href="options.html" target="_blank" class="alert-link">options</a> an catch up.
+            </div>
+          </div>
+          <div ng-controller='TimeController'>
+              <p>{{ clock  | date:'dd.MM.yyyy HH:mm:ss'}}</p>
+          </div>
+          
+        </div>
+      </div>
+    </div>
+    <script src="lib/angular.min.js"></script>
+    <script src="lib/moment-locales-2.8.4.min.js"></script>
+    <script src="js/services/OpenDataService.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/popup.js"></script>
+  </body>
+</html>
+
