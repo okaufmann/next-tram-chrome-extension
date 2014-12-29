@@ -8,7 +8,7 @@ nextTramOpendataService.factory('OpenDataService', function($http, $filter) {
     srv.getConnections = function(from,to){
         from = encodeURI(from);
         to = encodeURI(to);
-        var url = srv._baseUrl + 'connections?from=?' + from + "&to=" + to;
+        var url = srv._baseUrl + 'connections?from=?' + from + "&to=" + to+ "&limit=6";
         console.log("fetching new connections from ", url);
 
         return $http.get(url);
