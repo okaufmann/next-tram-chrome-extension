@@ -1,0 +1,23 @@
+{
+  "name": "next-tram-chrome-extension",
+  "version": "1.1.3",
+  "homepage": "https://github.com/mighty-code/next-tram-chrome-extension",
+  "authors": [
+    "Oliver Kaufmann <oliver@mighty-code.com>"
+  ],
+  "description": "This extension for Switzerland shows you how many minutes until your next public transportation like bus, tram or train departs.",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular-bootstrap": "~0.12.0",
+    "angular-chrome-storage": "infomofo/angular-chrome-storage",
+    "bootstrap": "~3.3.1",
+    "moment": "moment/moment#~2.9.0"
+  }
+}

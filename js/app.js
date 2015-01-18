@@ -1,1 +1,1 @@
-var nextTramApp = angular.module('NextTram', ['NextTramOpenDataService']);
+var nextTramApp = angular.module('NextTram', ['NextTramOpenDataService', 'NextTramOptionsService']);

@@ -1,13 +1,19 @@
 'use strict';
 
-nextTramOptionsApp.controller("OptionsController", function ($scope, $timeout, $filter, OpenDataService) {
-	$scope.loadingLocations = false;
-	$scope.options = OpenDataService.getOptions();
+nextTramOptionsApp.controller("OptionsController", function ($scope, $timeout, $filter, OpenDataService, OptionsService) {
 
-	var options = OpenDataService.getOptions();
+	OptionsService.getOptions().then(function(options){
+    	console.log('got options', options);
+    	if(options == undefined){
+    		$scope.options = {};
+    	}
+		$scope.options = options;        	
+    });
+
+	$scope.loadingLocations = false;
 
 	$scope.saveConnection = function (argument) {
-		OpenDataService.setOptions($scope.options);
+		OptionsService.setOptions($scope.options);
 		alert("saved");
 		console.log(localStorage);
 	};
@@ -20,6 +26,5 @@ nextTramOptionsApp.controller("OptionsController", function ($scope, $timeout, $
 		        return item.name;
 	      	});
 		});
-		
 	};
 });

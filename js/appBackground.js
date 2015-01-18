@@ -1,3 +1,4 @@
 var nextTramBackgroundApp = angular.module('NextTramBackground', [
-	'NextTramOpenDataService'
+	'NextTramOpenDataService',
+	'NextTramOptionsService'
 ]);

@@ -6,30 +6,31 @@
 	opendataReader.getdata(opendataReader.setdata);
 });*/
 
-nextTramApp.controller("PageController", function ($scope, $timeout, OpenDataService) {
+nextTramApp.controller("PageController", function ($scope, $timeout, OpenDataService, OptionsService) {
     $scope.setupRequired = true;
 
     $scope.showConnections = function(){
         //Read config
-    	var options = OpenDataService.getOptions();
+    	OptionsService.getOptions().then(function(options){
+            console.log('got options', options);
+            if(options != undefined){
+                $scope.setupRequired = false;
+                
+                $scope.optionsFrom = options.connection.from;
+                $scope.optionsTo = options.connection.to;
+                
+                var nextConnection = OpenDataService.getNextConnection();
+                $scope.connections = OpenDataService.getLocalConnections();
+                $scope.nextConnection = nextConnection;
+                $scope.nextConnectionSectionCategory = nextConnection.sections[0].journey.name.replace(nextConnection.sections[0].journey.number, "").trim();
+                $scope.nextConnText = OpenDataService.getNextConnectionInMinutesText(options);
+                $scope.nextConnInMin = OpenDataService.getNextConnectionInMinutes(options);
+            }else{
+                $scope.setupRequired = true;
+            }
 
-    	//Check config
-        if(options != null){
-            $scope.optionsFrom = options.connection.from;
-            $scope.optionsTo = options.connection.to;
-            $scope.setupRequired = false;
-            
-            var nextConnection = OpenDataService.getNextConnection();
-            $scope.connections = OpenDataService.getLocalConnections();
-            $scope.nextConnection = nextConnection;
-            $scope.nextConnectionSectionCategory = nextConnection.sections[0].journey.name.replace(nextConnection.sections[0].journey.number, "").trim();
-            $scope.nextConnText = OpenDataService.getNextConnectionInMinutesText();
-            $scope.nextConnInMin = OpenDataService.getNextConnectionInMinutes();
-        }else{
-            $scope.setupRequired = true;
-        }
-
-        $timeout($scope.showConnections,1000);
+            $timeout($scope.showConnections,1000);
+        });
     };
 
     $scope.showConnections();

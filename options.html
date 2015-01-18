@@ -2,7 +2,7 @@
 <html ng-app="NextTramOptions" ng-csp>
   <head>
     <title>Next Tram - Options</title>
-     <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+     <link rel="stylesheet" type="text/css" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
      <link rel="stylesheet" type="text/css" href="css/main.css">
      <style >
      	.nav, .pagination, .carousel, .panel-title a { cursor: pointer; }
@@ -59,16 +59,19 @@
 							      <span class="help-block">It can take some time till the connections will shown</span>
 							  </div>
 						</form>
+						<p>{{options.connection.from}} - {{options.connection.to}}</p>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
 
-    <script src="lib/angular.min.js"></script>
-    <script src="lib/ui-bootstrap-tpls-0.12.0.min.js"></script>
-    <script src="lib/moment-locales-2.8.4.min.js"></script>
+    <script src="bower_components/angular/angular.min.js"></script>
+    <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
+    <script src="bower_components/moment/min/moment-with-locales.min.js"></script>
+    <script src="bower_components/angular-chrome-storage/angular-chrome-storage.js"></script>
     <script src="js/services/OpenDataService.js"></script>
+    <script src="js/services/OptionsService.js"></script>
     <script src="js/appOptions.js"></script>
     <script src="js/options.js"></script>
   </body>

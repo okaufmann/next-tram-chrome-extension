@@ -17,6 +17,7 @@
   },
   "options_page": "options.html",
   "permissions": [
+    "storage",
     "http://transport.opendata.ch/",
     "background",
     "alarms",
