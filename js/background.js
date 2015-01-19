@@ -1,5 +1,27 @@
 'use strict';
 
+var onInstall = function(details) {
+    console.log("extension update check");
+
+    console.log("installed extension");
+    console.log(details);
+
+    var id = details.id;
+
+    if(details.reason = "install"){
+        console.log("first install");
+        alert("thx for installing Next Tram");
+    } 
+    else if(details.reason = "update") {
+        //chrome.browserAction.setBadgeText({"text" :"New" }); // tell the user  
+        console.log("new version installed:", id);
+        alert("Next Tram updated, review your options");
+        extensions[id] = details; // track the extension
+    }
+};
+
+chrome.runtime.onInstalled.addListener(onInstall);
+
 nextTramBackgroundApp.controller("BackgroundController", function ($scope, $timeout,$filter, OpenDataService, OptionsService) {
   var stop = null;
 
