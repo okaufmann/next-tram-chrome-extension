@@ -20,12 +20,12 @@
 				<p>Add the Connection you want to watch. </p>
 
 				<p>
-					<button class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span> New Connection</button>
+					<button class="btn btn-default" ng-click="form_show=true"><span class="glyphicon glyphicon-plus"></span> New Connection</button>
 				</p>
 
 				<div class="row">
 					<div class="col-md-6">
-						<form novalidate name="connection_form" ng-submit="saveConnection()" >
+						<form novalidate name="connection_form" ng-submit="saveConnection()" ng-show="form_show">
 							<div class="form-group">
 						     	<input type="text" class="form-control" name="options_connection_from" 
 						     	ng-model="options.connection.from"
@@ -55,11 +55,13 @@
 							    </select>
 							  </div>-->
 							  <div class="form-group">
-							      <button ng-disabled="connection_form.$invalid" type="submit" class="btn btn-default">Save</button>
+							      <button ng-disabled="connection_form.$invalid" type="submit" class="btn btn-primary">Save</button>
+							      <button ng-click="form_show=false" type="button" class="btn btn-danger">Cancel</button>
 							      <span class="help-block">It can take some time till the connections will shown</span>
 							  </div>
+							  <p>{{options.connection.from}} - {{options.connection.to}}</p>
 						</form>
-						<p>{{options.connection.from}} - {{options.connection.to}}</p>
+						
 						<table class="table table-striped table-responsive">
 							<thead>
 								<tr>

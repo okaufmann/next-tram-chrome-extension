@@ -2,20 +2,20 @@
 
 nextTramOptionsApp.controller("OptionsController", function ($scope, $timeout, $filter, OpenDataService, OptionsService) {
 
+	$scope.form_show = false;
 	OptionsService.getOptions().then(function(options){
     	console.log('got options', options);
     	if(options == undefined){
     		$scope.options = {};
     	}
-		$scope.options = options;        	
+		$scope.options = options;
     });
 
 	$scope.loadingLocations = false;
 
 	$scope.saveConnection = function (argument) {
-		OptionsService.setOptions($scope.options);
+		OptionsService.setOption($scope.options);
 		alert("saved");
-		console.log(localStorage);
 	};
 
 	$scope.getStation = function(query){
