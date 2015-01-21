@@ -10,10 +10,11 @@ nextTramOpendataService.factory('OptionsService', function($http, $filter, chrom
     };
 
     srv.setOptions = function(optionsObj){
-       chromeStorage.set('options', optionsObj);
+       return chromeStorage.set('options', optionsObj);
     }
 
     srv.addConnection = function(connection){
+        var deferred = $q.defer();
         chromeStorage.get('options').then(function(options){
             if(options != null){
 
@@ -22,10 +23,14 @@ nextTramOpendataService.factory('OptionsService', function($http, $filter, chrom
                 }
 
                 options.connections.push(connection);
+
+                deferred.resolve(options.connections);
             }
         });
+        return deferred.promise;
     };
     srv.setConnection = function(index,connection){
+        var deferred = $q.defer();
         chromeStorage.get('options').then(function(options){
             if(options != null){
                 if(options.connections[index] == undefined){
@@ -34,17 +39,23 @@ nextTramOpendataService.factory('OptionsService', function($http, $filter, chrom
                 }else{
                     options.connections[index] = connection;
                 }
+
+                deferred.resolve(options.connections);
             }
         });
+        return deferred.promise;
     };
     srv.removeConnection = function(index){
+        var deferred = $q.defer();
         chromeStorage.get('options').then(function(options){
             if(options != null){
                 if(options.connections[index] != undefined){
                     options.connections.splice(index, 1);
                 }
+                deferred.resolve(options.connections);
             }
         });
+        return deferred.promise;
     };
     srv.getConnections = function(){
         var deferred = $q.defer();
