@@ -3,19 +3,25 @@
 nextTramOptionsApp.controller("OptionsController", function ($scope, $timeout, $filter, OpenDataService, OptionsService) {
 
 	$scope.form_show = false;
-	OptionsService.getOptions().then(function(options){
+	/*OptionsService.getOptions().then(function(options){
     	console.log('got options', options);
     	if(options == undefined){
     		$scope.options = {};
     	}
 		$scope.options = options;
-    });
+    });*/
 
 	$scope.loadingLocations = false;
 
 	$scope.saveConnection = function (argument) {
-		OptionsService.setOption($scope.options);
-		alert("saved");
+		console.log('add connection');
+		OptionsService.addConnection($scope.options.connection).then(function(connections){
+			console.log(connections);
+			alert("saved");
+		}).catch(function(reason){
+			console.log("error saving connection", reason);
+			alert("error saving connection");
+		});
 	};
 
 	$scope.getStation = function(query){

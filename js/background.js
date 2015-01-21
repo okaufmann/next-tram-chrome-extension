@@ -83,5 +83,5 @@ nextTramBackgroundApp.controller("BackgroundController", function ($scope, $time
       });
   };
 
-  $scope.refreshConnections();
+  //$scope.refreshConnections();
 });
