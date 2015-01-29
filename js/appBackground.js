@@ -1,4 +1,5 @@
 var nextTramBackgroundApp = angular.module('NextTramBackground', [
 	'NextTramOpenDataService',
-	'NextTramOptionsService'
+	'NextTramOptionsService',
+	'angularUUID2'
 ]);

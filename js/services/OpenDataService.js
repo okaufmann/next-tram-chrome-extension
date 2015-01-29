@@ -14,14 +14,6 @@ nextTramOpendataService.factory('OpenDataService', function($http, $filter) {
         return $http.get(url);
     };
 
-    srv.getLocalConnections = function() {
-        return angular.fromJson(localStorage['connections']);
-    };
-
-    srv.setLocalConnections = function(connections) {
-        localStorage['connections'] = angular.toJson(connections);
-    };
-
     srv.getNextConnection = function(){
         var localConns = srv.getLocalConnections();
         if(localConns != null && localConns.length > 0){

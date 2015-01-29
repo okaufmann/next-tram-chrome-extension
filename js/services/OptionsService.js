@@ -1,8 +1,9 @@
-var nextTramOpendataService = angular.module('NextTramOptionsService', 
-	['chromeStorage']
-);
+var nextTramOpendataService = angular.module('NextTramOptionsService', 	[
+    'chromeStorage',
+    'angularUUID2'
+]);
 
-nextTramOpendataService.factory('OptionsService', function($http, $filter, chromeStorage, $q) {
+nextTramOpendataService.factory('OptionsService', function($http, $filter, chromeStorage, $q,uuid2) {
     var srv = {};
 
     srv.getOptions = function(){
@@ -14,23 +15,27 @@ nextTramOpendataService.factory('OptionsService', function($http, $filter, chrom
     }
 
     srv.addConnection = function(connection){
-        return chromeStorage.get('options').then(function(options){
+        var deferred = $q.defer();
+        var options = {};
+        chromeStorage.get('options').then(function(options){
             console.log("about to add the connection");
-            var deferred = $q.defer();
             if(options == null){
                 options = {};
             }
 
             if(options.connections == undefined || options.connections == null){
-                options.connections = [];
+                options.connections = new Array();
             }
+            //create unique id
+            var guid = uuid2.newguid();
+            connection.id = guid;
 
             options.connections.push(connection);
-            console.log();
-            return srv.setOptions(options).then(function(data){
-                return data;
-            });
+            console.log(options.connections);
+            deferred.resolve(options);
+            srv.setOptions(options);
         });
+        return deferred.promise;
     };
     srv.setConnection = function(index,connection){
         var deferred = $q.defer();
@@ -48,14 +53,15 @@ nextTramOpendataService.factory('OptionsService', function($http, $filter, chrom
         });
         return deferred.promise;
     };
-    srv.removeConnection = function(index){
+    srv.removeConnection = function(connection){
         var deferred = $q.defer();
         chromeStorage.get('options').then(function(options){
             if(options != null){
-                if(options.connections[index] != undefined){
-                    options.connections.splice(index, 1);
-                }
-                deferred.resolve(options.connections);
+                //options.connections = [];
+                var index = options.connections.indexOf(connection)
+                options.connections.splice(index, 1);
+                srv.setOptions(options);
+                deferred.resolve(options);
             }
         });
         return deferred.promise;

@@ -17,7 +17,7 @@
 			<div class="col-md-12">
 				<h1 class="page-header">Next Tram <small>Options</small></h1>
 
-				<p>Add the Connection you want to watch. </p>
+				<p>For adding new Connections, click on "<i>New Connection</i>"</p>
 
 				<p>
 					<button class="btn btn-default" ng-click="form_show=true"><span class="glyphicon glyphicon-plus"></span> New Connection</button>
@@ -27,26 +27,27 @@
 					<div class="col-md-6">
 						<form novalidate name="connection_form" ng-submit="saveConnection()" ng-show="form_show">
 							<div class="form-group">
-						     	<input type="text" class="form-control" name="options_connection_from" 
-						     	ng-model="options.connection.from"
+						     	<input type="text" class="form-control" name="connection_from" 
+						     	ng-model="connection.from"
 						     	placeholder="From" 
 						     	typeahead="station for station in getStation($viewValue)" 
 						     	typeahead-wait-ms="100" required >
-						     	<span ng-show="connection_form.options_connection_from.$invalid" class="help-block">required</span>
+						     	<span ng-show="connection_form.connection_from.$invalid" class="help-block">required</span>
 							  </div>
 							  <div class="form-group">
-							    <input type="text" class="form-control" name="options_connection_to" placeholder="To" 
-							    ng-model="options.connection.to" 
+							    <input type="text" class="form-control" name="connection_to" placeholder="To" 
+							    ng-model="connection.to" 
 						     	typeahead="station for station in getStation($viewValue)" 
 						     	typeahead-wait-ms="100" required>
-						     	<span ng-show="connection_form.options_connection_to.$invalid" class="help-block">
+						     	<span ng-show="connection_form.connection_to.$invalid" class="help-block">
 						     	required</span>
 							  </div>
 							  <div class="form-group">
-							    <input type="number" class="form-control" name="options_connection_timeToStation" placeholder="Time offset in minutes" 
-							    ng-model="options.time_offset" >
-						     	<span ng-show="connection_form.options_connection_timeToStation.$invalid" class="help-block">
+							    <input type="number" class="form-control" name="connection_timeToStation" placeholder="Time to Station" 
+							    ng-model="connection.timeToStation">
+						     	<span ng-show="connection_form.connection_timeToStation.$invalid" class="help-block">
 						     	must be a number</span>
+						     	<p class="help-block">This time will be added to the departure times, so you can leave on time.</p>
 							  </div>
 							  
 							  <!-- <div class="form-group">
@@ -59,7 +60,7 @@
 							      <button ng-click="form_show=false" type="button" class="btn btn-danger">Cancel</button>
 							      <span class="help-block">It can take some time till the connections will shown</span>
 							  </div>
-							  <p>{{options.connection.from}} - {{options.connection.to}}</p>
+							  <!-- <p>From: {{connection.from}} To{{connection.to}}, leaving {{connection.timeToStation}} minutes earlier.</p> -->
 						</form>
 						
 						<table class="table table-striped table-responsive">
@@ -67,14 +68,16 @@
 								<tr>
 									<th>From</th>
 									<th>To</th>
+									<th>Time to Station</th>
 									<th></th>
 								</tr>
 							</thead>
 							<tbody>
-								<tr ng-repeat="connection in connections">
+								<tr ng-repeat="connection in options.connections">
 									<td>{{connection.from}}</td>
 									<td>{{connection.to}}</td>
-									<td><button class="btn btn-default"><span class="fa fa-pencil"></span></button>
+									<td>{{connection.timeToStation}}</td>
+									<td><button class="btn btn-default" tooltip="Remove connection" ng-click="removeConnection(connection)"><span class="glyphicon glyphicon-remove"></span></button></td>
 								</tr>
 							</tbody>
 						</table>
@@ -88,6 +91,7 @@
     <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
     <script src="bower_components/moment/min/moment-with-locales.min.js"></script>
     <script src="bower_components/angular-chrome-storage/angular-chrome-storage.js"></script>
+    <script src="bower_components/angular.uuid/dist/angular-uuid2.min.js"></script>
     <script src="js/services/OpenDataService.js"></script>
     <script src="js/services/OptionsService.js"></script>
     <script src="js/appOptions.js"></script>

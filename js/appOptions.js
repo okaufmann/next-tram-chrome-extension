@@ -1,5 +1,6 @@
 var nextTramOptionsApp = angular.module('NextTramOptions', [
 	'NextTramOpenDataService',
 	'NextTramOptionsService',
-	'ui.bootstrap'
+	'ui.bootstrap',
+	'angularUUID2'
 ]);
