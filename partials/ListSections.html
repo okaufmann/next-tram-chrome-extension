@@ -1,0 +1,4 @@
+<span ng-repeat="section in nextConnectionSections" 
+ng-if="section.journey !== null">
+		{{section.journey.name.replace(section.journey.number, "").trim()}},
+</span>

@@ -27,7 +27,7 @@
               </p>
               <div class="well">
                 Next in <b>{{nextConnText}}</b> ({{nextConnection.from.departure| date:'dd.MM.yyyy: HH:mm'}})<br/>
-                with <b>{{nextConnectionSectionCategory}}</b>
+                with <span ng-include="'partials/ListSections.html'"></span>
               </div>
 
               <p>

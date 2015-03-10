@@ -54,9 +54,8 @@ nextTramBackgroundApp.controller("BackgroundController", function ($scope, $time
                 //17:30
                 //YYYY-MM-DD
                 var dateTime = moment().add(selectedConnection.timeToStation, 'minutes');
-                var time = dateTime.format('hh:mm');
+                var time = dateTime.format('HH:mm');
                 var date = dateTime.format('YYYY-MM-DD');
-
 
                 OpenDataService.getConnections(selectedConnection.from, selectedConnection.to, time, date)
                 .success(function(data, status){
@@ -74,7 +73,7 @@ nextTramBackgroundApp.controller("BackgroundController", function ($scope, $time
                         var departureAt = $filter('date')(nextConnection.from.departure, "dd.MM.yyyy HH:mm");
 
                         var firstSection = nextConnection.sections[0];
-                        var sectionCategory = firstSection.journey.name.replace(firstSection.journey.number, "").trim();
+                        //var sectionCategory = firstSection.journey.name.replace(firstSection.journey.number, "").trim();
 
                         var leaveIn = (departuereIn - selectedConnection.timeToStation);
 

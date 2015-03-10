@@ -35,14 +35,15 @@ nextTramApp.controller("PageController", function ($scope, $timeout, OpenDataSer
         
         //Read config
     	OptionsService.getOptions().then(function(options){
-            console.log('got options', options);
+            //console.log('got options', options);
             if(options != undefined){
                 $scope.setupRequired = false;
                 
                 var nextConnection = TimeTableService.getNextConnection();
                 $scope.localConnections = TimeTableService.getLocalConnections();
                 $scope.nextConnection = nextConnection;
-                $scope.nextConnectionSectionCategory = nextConnection.sections[0].journey.name.replace(nextConnection.sections[0].journey.number, "").trim();
+
+                $scope.nextConnectionSections = nextConnection.sections;
                 $scope.nextConnText = TimeTableService.getNextConnectionInMinutesText(options);
                 $scope.nextConnInMin = TimeTableService.getNextConnectionInMinutes(options);
             }else{
