@@ -28,8 +28,10 @@ nextTramBackgroundApp.controller("BackgroundController", function ($scope, $time
   var stop = null;
 
   $scope.refreshConnections = function(){
+        
         OptionsService.getOptions().then(function(options){
             try{
+
                 var icon = new Object();
                 var title = new Object();
                 var badge = new Object();
@@ -105,7 +107,6 @@ nextTramBackgroundApp.controller("BackgroundController", function ($scope, $time
                    console.log("can't fetch connections, try again in 10 seconds...");
                    stop = $timeout($scope.refreshConnections, 10000);
                 });
-
             }catch(ex){
                 console.log("error fetching connections!, try again in 10 seconds...", ex);
                 stop = $timeout($scope.refreshConnections, 10000);
