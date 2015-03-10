@@ -1,3 +1,5 @@
+'use strict';
+
 var nextTramOpendataService = angular.module('NextTramOpenDataService', []);
 
 nextTramOpendataService.factory('OpenDataService', function($http, $filter) {
@@ -12,37 +14,6 @@ nextTramOpendataService.factory('OpenDataService', function($http, $filter) {
         console.log("fetching new connections from ", url);
 
         return $http.get(url);
-    };
-
-    srv.getNextConnection = function(){
-        var localConns = srv.getLocalConnections();
-        if(localConns != null && localConns.length > 0){
-            return localConns[0];
-        }else{
-            return "";
-        }
-    };
-
-    srv.getNextConnectionInMinutes = function(options){
-        var nextConn = srv.getNextConnection();
-        var min = moment();
-        var max = moment(nextConn.from.departure);
-
-        if(options != null && options.time_offset > 0){
-            max.subtract(options.time_offset,"minutes");
-        }
-        return max.diff(min, 'minutes');
-    };
-
-    srv.getNextConnectionInMinutesText = function(options){
-        var nextConn = srv.getNextConnection();
-        var max = moment(nextConn.from.departure);
-
-        if(options != null && options.time_offset > 0){
-            max.subtract(options.time_offset,"minutes");
-        }
-        var min = moment();
-        return max.from(min, true);
     };
 
     srv.queryLocations = function(query, type){
@@ -63,21 +34,6 @@ nextTramOpendataService.factory('OpenDataService', function($http, $filter) {
     return {
         getConnections:  function(from,to){
             return srv.getConnections(from,to);
-        },
-        getLocalConnections:  function(){
-            return   srv.getLocalConnections();
-        },
-        setLocalConnections: function(connections){
-            srv.setLocalConnections(connections);
-        },
-        getNextConnection: function(){
-            return srv.getNextConnection();
-        },
-        getNextConnectionInMinutes: function(options){
-            return srv.getNextConnectionInMinutes();
-        },
-        getNextConnectionInMinutesText: function(options){
-            return srv.getNextConnectionInMinutesText();
         },
         queryLocations:function(query, type){
             return srv.queryLocations(query,type);

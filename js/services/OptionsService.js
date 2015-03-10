@@ -1,3 +1,5 @@
+'use strict';
+
 var nextTramOpendataService = angular.module('NextTramOptionsService', 	[
     'chromeStorage',
     'angularUUID2'
