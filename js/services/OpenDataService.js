@@ -7,10 +7,22 @@ nextTramOpendataService.factory('OpenDataService', function($http, $filter) {
 
     srv._baseUrl = "http://transport.opendata.ch/v1/";
 
-    srv.getConnections = function(from,to){
+    srv.getConnections = function(from, to, time, date){
+        
+        if(time == undefined){
+            time = null;
+        }
+
+        if(date == undefined){
+            date = null;
+        }
+        
         from = encodeURI(from);
         to = encodeURI(to);
-        var url = srv._baseUrl + 'connections?from=?' + from + "&to=" + to+ "&limit=6";
+        time = encodeURI(time);
+        date = encodeURI(date);
+
+        var url = srv._baseUrl + 'connections?from=' + from + "&to=" + to+ "&limit=6&time="+ time+ "&date=" + date;
         console.log("fetching new connections from ", url);
 
         return $http.get(url);
@@ -32,7 +44,7 @@ nextTramOpendataService.factory('OpenDataService', function($http, $filter) {
 
      // Public API
     return {
-        getConnections:  function(from,to){
+        getConnections:  function(from,to, time, date){
             return srv.getConnections(from,to);
         },
         queryLocations:function(query, type){

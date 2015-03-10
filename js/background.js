@@ -50,7 +50,15 @@ nextTramBackgroundApp.controller("BackgroundController", function ($scope, $time
 
                 var selectedConnection = _.findWhere(options.connections, {id: options.selectedConnectionID});
                 console.log(selectedConnection);
-                OpenDataService.getConnections(selectedConnection.from, selectedConnection.to)
+
+                //17:30
+                //YYYY-MM-DD
+                var dateTime = moment().add(selectedConnection.timeToStation, 'minutes');
+                var time = dateTime.format('hh:mm');
+                var date = dateTime.format('YYYY-MM-DD');
+
+
+                OpenDataService.getConnections(selectedConnection.from, selectedConnection.to, time, date)
                 .success(function(data, status){
                     console.log("fetched connections from API: ",data);
                     if(data != null && data.connections != null && data.connections.length > 0)
