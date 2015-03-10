@@ -9,6 +9,12 @@ nextTramApp.controller("PageController", function ($scope, $timeout, OpenDataSer
         //set selected Connection
         OptionsService.getOptions().then(function(options){
             options.selectedConnectionID = $scope.selectedConnectionID;
+            if($scope.selectedConnectionID != null){
+                var selectedConnection = _.findWhere(options.connections, {id: options.selectedConnectionID});
+                $scope.optionsFrom = selectedConnection.from;
+                $scope.optionsTo = selectedConnection.to;
+                $scope.optionsTimeToStation = selectedConnection.timeToStation + ' minutes';
+            }
             OptionsService.setOptions(options);
             console.log(options);
         });
@@ -17,10 +23,12 @@ nextTramApp.controller("PageController", function ($scope, $timeout, OpenDataSer
     OptionsService.getOptions().then(function(options){
         $scope.connections = options.connections;
         $scope.selectedConnectionID = options.selectedConnectionID;
-        var selectedConnection = _.findWhere(options.connections, {id: options.selectedConnectionID});
-        $scope.optionsFrom = selectedConnection.from;
-        $scope.optionsTo = selectedConnection.to;
-        $scope.optionsTimeToStation = selectedConnection.timeToStation + ' minutes';
+        if($scope.selectedConnectionID != null){
+            var selectedConnection = _.findWhere(options.connections, {id: options.selectedConnectionID});
+            $scope.optionsFrom = selectedConnection.from;
+            $scope.optionsTo = selectedConnection.to;
+            $scope.optionsTimeToStation = selectedConnection.timeToStation + ' minutes';
+        }
     });
 
     $scope.showConnections = function(){
