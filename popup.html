@@ -27,7 +27,7 @@
               </p>
               <div class="well">
                 Next in <b>{{nextConnText}}</b> ({{nextConnection.from.departure| date:'dd.MM.yyyy: HH:mm'}})<br/>
-                with <span product-list products="nextConnectionProducts"></span>
+                with <span product-list products="nextConnection.products"></span> Duration: {{nextConnection.duration}}
               </div>
 
               <p>
@@ -57,11 +57,12 @@
         </div>
       </div>
     </div>
+    <script src="vendor/moment/moment-with-locales.min.js"></script>
+    <script src="vendor/underscore/underscore-min.js"></script>
     <script src="vendor/angular/angular.min.js"></script>
     <script src="vendor/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
-    <script src="vendor/moment/moment-with-locales.min.js"></script>
     <script src="vendor/angular.uuid/angular-uuid2.min.js"></script>
-    <script src="vendor/underscore/underscore-min.js"></script>
+    <script src="vendor/angular-moment/angular-moment.min.js"></script>
     <script src="js/angular-chrome-storage/angular-chrome-storage.js"></script>
     <script src="js/services/TimetableService.js"></script>
     <script src="js/services/OpenDataService.js"></script>
