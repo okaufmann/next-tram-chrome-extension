@@ -27,7 +27,7 @@
               </p>
               <div class="well">
                 Next in <b>{{nextConnText}}</b> ({{nextConnection.from.departure| date:'dd.MM.yyyy: HH:mm'}})<br/>
-                with <span product-list products="nextConnectionProducts"></span> ({{nextConnectionProducts.length}})
+                with <span product-list products="nextConnectionProducts"></span>
               </div>
 
               <p>
@@ -41,7 +41,7 @@
                 <tbody>
                   <tr ng-repeat="connection in localConnections track by $index">
                     <td>{{connection.from.departure| date:'dd.MM.yyyy HH:mm'}}</td>
-                    <td><span product-list products="connection.products"></span> ({{connection.products.length}})</td>
+                    <td><span product-list products="connection.products"></span></td>
                   </tr>
                 </tbody>
               </table>

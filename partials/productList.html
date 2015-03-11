@@ -1,4 +1,4 @@
 <span ng-repeat="product in products track by $index" 
 ng-if="product !== null">
 		{{product}}<span ng-if="$last == false">,</span>
-</span>
+</span> ({{products.length}})
