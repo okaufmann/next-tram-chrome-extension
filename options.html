@@ -20,7 +20,7 @@
 				<p>For adding new Connections, click on "<i>New Connection</i>"</p>
 
 				<p>
-					<button class="btn btn-default" ng-click="form_show=true"><span class="glyphicon glyphicon-plus"></span> New Connection</button>
+					<button class="btn btn-default" ng-click="form_show=true;connection={};lastEditIndex=null"><span class="glyphicon glyphicon-plus"></span> New Connection</button>
 				</p>
 
 				<div class="row">
@@ -44,7 +44,7 @@
 							  </div>
 							  <div class="form-group">
 							    <input type="number" class="form-control" name="connection_timeToStation" placeholder="Time to Station" 
-							    ng-model="connection.timeToStation">
+							    ng-model="connection.timeToStation" required>
 						     	<span ng-show="connection_form.connection_timeToStation.$invalid" class="help-block">
 						     	must be a number</span>
 						     	<p class="help-block">This time will be added to the departure times, so you can leave on time.</p>
@@ -73,11 +73,11 @@
 								</tr>
 							</thead>
 							<tbody>
-								<tr ng-repeat="connection in options.connections">
+								<tr ng-repeat="connection in options.connections track by $index">
 									<td>{{connection.from}}</td>
 									<td>{{connection.to}}</td>
 									<td>{{connection.timeToStation}}</td>
-									<td><button class="btn btn-default" tooltip="Remove connection" ng-click="removeConnection(connection)"><span class="glyphicon glyphicon-remove"></span></button></td>
+									<td><button class="btn btn-default" tooltip="Edit connection" ng-click="editConnection($index,connection)"><span class="glyphicon glyphicon-pencil"></span></button> <button class="btn btn-default" tooltip="Remove connection" ng-click="removeConnection(connection)"><span class="glyphicon glyphicon-remove"></span></button></td>
 								</tr>
 							</tbody>
 						</table>
@@ -89,10 +89,10 @@
 
     <script src="vendor/angular/angular.min.js"></script>
     <script src="vendor/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
-    <script src="vendor/moment/min/moment-with-locales.min.js"></script>
-    <script src="vendor/angular-chrome-storage/angular-chrome-storage.js"></script>
-    <script src="vendor/angular.uuid/dist/angular-uuid2.min.js"></script>
+    <script src="vendor/moment/moment-with-locales.min.js"></script>
+    <script src="vendor/angular.uuid/angular-uuid2.min.js"></script>
     <script src="vendor/underscore/underscore-min.js"></script>
+    <script src="js/angular-chrome-storage/angular-chrome-storage.js"></script>
     <script src="js/services/OpenDataService.js"></script>
     <script src="js/services/OptionsService.js"></script>
     <script src="js/appOptions.js"></script>

@@ -27,7 +27,7 @@
               </p>
               <div class="well">
                 Next in <b>{{nextConnText}}</b> ({{nextConnection.from.departure| date:'dd.MM.yyyy: HH:mm'}})<br/>
-                with <span section-list sections="{{nextConnectionSections}}"></span>
+                with <span product-list products="nextConnectionProducts"></span> ({{nextConnectionProducts.length}})
               </div>
 
               <p>
@@ -36,12 +36,12 @@
               <table class="table table-striped table-condensed table-responsive">
                 <thead>
                   <th>Departure</th>
-                  <th>Product</th>
+                  <th></th>
                 </thead>
                 <tbody>
                   <tr ng-repeat="connection in localConnections track by $index">
                     <td>{{connection.from.departure| date:'dd.MM.yyyy HH:mm'}}</td>
-                    <td>{{connection.sections[0].journey.name.replace(connection.sections[0].journey.number, "").trim()}}</td>
+                    <td><span product-list products="connection.products"></span> ({{connection.products.length}})</td>
                   </tr>
                 </tbody>
               </table>
@@ -59,14 +59,14 @@
     </div>
     <script src="vendor/angular/angular.min.js"></script>
     <script src="vendor/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
-    <script src="vendor/moment/min/moment-with-locales.min.js"></script>
-    <script src="vendor/angular-chrome-storage/angular-chrome-storage.js"></script>
-    <script src="vendor/angular.uuid/dist/angular-uuid2.min.js"></script>
+    <script src="vendor/moment/moment-with-locales.min.js"></script>
+    <script src="vendor/angular.uuid/angular-uuid2.min.js"></script>
     <script src="vendor/underscore/underscore-min.js"></script>
+    <script src="js/angular-chrome-storage/angular-chrome-storage.js"></script>
     <script src="js/services/TimetableService.js"></script>
     <script src="js/services/OpenDataService.js"></script>
     <script src="js/services/OptionsService.js"></script>
-    <script src="js/directives/SectionListDirective.js"></script>
+    <script src="js/directives/ProductListDirective.js"></script>
     <script src="js/app.js"></script>
     <script src="js/popup.js"></script>
   </body>

@@ -10,7 +10,7 @@ var onInstall = function(details) {
 
     if(details.reason = "install"){
         console.log("first install");
-        alert("thx for installing Next Tram");
+        alert("thx for installing Next Tram!");
         chrome.tabs.create({url: "options.html"});
         localStorage.clear();
     } 
@@ -19,6 +19,7 @@ var onInstall = function(details) {
         console.log("new version installed:", id);
         alert("Next Tram successfully updated.");
         extensions[id] = details; // track the extension
+        localStorage.clear();
     }
 };
 

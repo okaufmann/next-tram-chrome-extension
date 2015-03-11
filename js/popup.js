@@ -43,7 +43,7 @@ nextTramApp.controller("PageController", function ($scope, $timeout, OpenDataSer
                 $scope.localConnections = TimeTableService.getLocalConnections();
                 $scope.nextConnection = nextConnection;
 
-                $scope.nextConnectionSections = nextConnection.sections;
+                $scope.nextConnectionProducts = nextConnection.products;
                 $scope.nextConnText = TimeTableService.getNextConnectionInMinutesText(options);
                 $scope.nextConnInMin = TimeTableService.getNextConnectionInMinutes(options);
             }else{

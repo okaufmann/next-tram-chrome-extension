@@ -42,6 +42,7 @@ nextTramOpendataService.factory('OptionsService', function($http, $filter, chrom
     srv.setConnection = function(index,connection){
         var deferred = $q.defer();
         chromeStorage.get('options').then(function(options){
+            console.log(index);
             if(options != null){
                 if(options.connections[index] == undefined){
                     options.connections = [];
@@ -50,7 +51,8 @@ nextTramOpendataService.factory('OptionsService', function($http, $filter, chrom
                     options.connections[index] = connection;
                 }
 
-                deferred.resolve(options.connections);
+                deferred.resolve(options);
+                srv.setOptions(options);
             }
         });
         return deferred.promise;
