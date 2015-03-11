@@ -27,7 +27,7 @@
               </p>
               <div class="well">
                 Next in <b>{{nextConnText}}</b> ({{nextConnection.from.departure| date:'dd.MM.yyyy: HH:mm'}})<br/>
-                with <span ng-include="'partials/ListSections.html'"></span>
+                with <span section-list sections="{{nextConnectionSections}}"></span>
               </div>
 
               <p>
@@ -66,6 +66,7 @@
     <script src="js/services/TimetableService.js"></script>
     <script src="js/services/OpenDataService.js"></script>
     <script src="js/services/OptionsService.js"></script>
+    <script src="js/directives/SectionListDirective.js"></script>
     <script src="js/app.js"></script>
     <script src="js/popup.js"></script>
   </body>

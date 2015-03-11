@@ -1,4 +1,4 @@
-<span ng-repeat="section in nextConnectionSections" 
+<span ng-repeat="section in sections track by $index" 
 ng-if="section.journey !== null">
 		{{section.journey.name.replace(section.journey.number, "").trim()}},
 </span>
