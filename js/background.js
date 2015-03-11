@@ -10,14 +10,14 @@ var onInstall = function(details) {
 
     if(details.reason = "install"){
         console.log("first install");
-        alert("thx for installing Next Tram!");
+        //alert("thx for installing Next Tram!");
         chrome.tabs.create({url: "options.html"});
         localStorage.clear();
     } 
     else if(details.reason = "update") {
         //chrome.browserAction.setBadgeText({"text" :"New" }); // tell the user  
         console.log("new version installed:", id);
-        alert("Next Tram successfully updated.");
+        //alert("Next Tram successfully updated.");
         extensions[id] = details; // track the extension
         localStorage.clear();
     }
@@ -47,20 +47,18 @@ nextTramBackgroundApp.controller("BackgroundController", function ($scope, $time
                     return;
                 }
 
-                console.log("options ok, got:", options);
-
                 var selectedConnection = _.findWhere(options.connections, {id: options.selectedConnectionID});
-                console.log(selectedConnection);
 
                 //17:30
                 //YYYY-MM-DD
-                var dateTime = moment().add(selectedConnection.timeToStation, 'minutes');
+                //var dateTime = moment().add(selectedConnection.timeToStation, 'minutes');
+                var dateTime = moment();
                 var time = dateTime.format('HH:mm');
                 var date = dateTime.format('YYYY-MM-DD');
 
                 OpenDataService.getConnections(selectedConnection.from, selectedConnection.to, time, date)
                 .success(function(data, status){
-                    console.log("fetched connections from API: ",data);
+                    console.log("fetched connections from API");
                     if(data != null && data.connections != null && data.connections.length > 0)
                     {
                         var connections = data.connections;
@@ -104,7 +102,7 @@ nextTramBackgroundApp.controller("BackgroundController", function ($scope, $time
                         chrome.browserAction.setBadgeText(badge);
                         chrome.browserAction.setTitle(title);
                         chrome.browserAction.setIcon(icon);
-                        console.log("connections refreshed, next refresh in 15 seconds...");
+                        console.log("connections refreshed, next in 15 seconds...");
                         stop = $timeout($scope.refreshConnections, 15000);
                     }else{
                         console.log("can't fetch connections, try again in 10 seconds...");

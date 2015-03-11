@@ -1,6 +1,7 @@
 'use strict';
 
 nextTramOptionsApp.controller("OptionsController", function ($scope, $timeout, $filter, OpenDataService, OptionsService) {
+	var stack_bottomright = {dir1: "up", dir2: "left", firstpos1: 25, firstpos2: 25};
 
 	$scope.form_show = false;
 	$scope.lastEditIndex = null;
@@ -14,6 +15,23 @@ nextTramOptionsApp.controller("OptionsController", function ($scope, $timeout, $
 
 	$scope.loadingLocations = false;
 
+	var showNotification = function(text, type){
+		type = type || 'info';
+		new PNotify({
+		    title: 'Information',
+		    text: text,
+		    delay: 3500,
+		    nonblock: {
+	            nonblock: true,
+	            nonblock_opacity: .2
+	        },
+	        //animate_speed: 'fast',
+		    type: 'info',
+		    addclass: "stack-bottomright",
+		    stack: stack_bottomright
+		});
+	};
+
 	$scope.saveConnection = function (argument) {
 		console.log('add connection');
 		console.log($scope.lastEditIndex);
@@ -22,10 +40,11 @@ nextTramOptionsApp.controller("OptionsController", function ($scope, $timeout, $
 				console.log("saved connection successfully", options.connections);
 				$scope.options = options;
 				$scope.connection = {};
-				alert("saved connection successfully");
+				showNotification('saved connection successfully','success');
+				
 			}).catch(function(reason){
 				console.log("error saving connection", reason);
-				alert("error saving connection");
+				showNotification('error saving connection','error');
 			});
 		}else{
 			OptionsService.setConnection($scope.lastEditIndex, $scope.connection).then(function(options){

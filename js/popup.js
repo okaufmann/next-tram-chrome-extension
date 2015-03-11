@@ -1,9 +1,15 @@
 'use strict';
 
-nextTramApp.filter("duration",function () {
+nextTramApp.filter('duration',function () {
     return function(input){
-        
-    }
+        var duration = moment.duration(input);
+
+        if(duration.hours() == 0){
+            return duration.minutes() + ' min';
+        }else{
+            return duration.hours() + ' h, ' + duration.minutes() + ' min';
+        }
+    };
 });
 
 nextTramApp.controller("PageController", function ($scope, $timeout, OpenDataService, OptionsService, TimeTableService) {
@@ -38,13 +44,7 @@ nextTramApp.controller("PageController", function ($scope, $timeout, OpenDataSer
     });
 
     $scope.formatDuration = function(durationString){
-        var duration = moment.duration(nextConnection.duration);
-
-        if(duration.hours() == 0){
-            return duration.minutes() + ' minutes';
-        }else{
-            return duration.hours() + ':' + duration.minutes();
-        }
+        
     }
 
     $scope.showConnections = function(){
@@ -58,7 +58,6 @@ nextTramApp.controller("PageController", function ($scope, $timeout, OpenDataSer
                 var nextConnection = TimeTableService.getNextConnection();
                 $scope.localConnections = TimeTableService.getLocalConnections();
                 $scope.nextConnection = nextConnection;
-                //$scope.nextConnectionDurationFormated = 
                 $scope.nextConnText = TimeTableService.getNextConnectionInMinutesText(options);
                 $scope.nextConnInMin = TimeTableService.getNextConnectionInMinutes(options);
             }else{

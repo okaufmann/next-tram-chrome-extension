@@ -1,8 +1,9 @@
 <!doctype html>
 <html ng-app="NextTramOptions" ng-csp>
   <head>
-    <title>Next Tram - Options</title>
+    <title>Options - Next Tram</title>
      <link rel="stylesheet" type="text/css" href="vendor/bootstrap/dist/css/bootstrap.min.css">
+     <link rel="stylesheet" type="text/css" href="vendor/pnotify/pnotify.custom.min.css">
      <link rel="stylesheet" type="text/css" href="css/main.css">
      <style >
      	.nav, .pagination, .carousel, .panel-title a { cursor: pointer; }
@@ -68,7 +69,7 @@
 								<tr>
 									<th>From</th>
 									<th>To</th>
-									<th>Time to Station</th>
+									<th>Minutes to station</th>
 									<th></th>
 								</tr>
 							</thead>
@@ -87,11 +88,13 @@
 		</div>
 	</div>
 
+    <script src="vendor/underscore/underscore-min.js"></script>
+    <script src="vendor/moment/moment-with-locales.min.js"></script>
+    <script src="vendor/jquery/jquery-1.11.2.min.js"></script>
+    <script src="vendor/pnotify/pnotify.custom.min.js"></script>
     <script src="vendor/angular/angular.min.js"></script>
     <script src="vendor/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
-    <script src="vendor/moment/moment-with-locales.min.js"></script>
     <script src="vendor/angular.uuid/angular-uuid2.min.js"></script>
-    <script src="vendor/underscore/underscore-min.js"></script>
     <script src="js/angular-chrome-storage/angular-chrome-storage.js"></script>
     <script src="js/services/OpenDataService.js"></script>
     <script src="js/services/OptionsService.js"></script>
