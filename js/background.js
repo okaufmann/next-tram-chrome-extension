@@ -92,7 +92,7 @@ nextTramBackgroundApp.controller("BackgroundController", function ($scope, $time
                         if(leaveIn > 0){
                             title.title = 'You have to leave in ' + leaveIn + ' minutes to catch the next connection';
                         }else if(leaveIn == 0){
-                            title.title = 'You have to leave now minutes to catch the next connection';
+                            title.title = 'You have to leave now to catch the next connection';
                         }else{
                             title.title = 'You missed the connection, wait for the next one...';
                         }
