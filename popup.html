@@ -18,12 +18,6 @@
               <p>
                 <select class="form-control" ng-model="selectedConnectionID" ng-options="connection.id as connection.from + ' - ' + connection.to + ' (' + connection.timeToStation + ' min to station)' for connection in connections">
                 </select>
-                {{selectedConnection}}
-              </p>
-              <p>
-                <!-- <b>From:</b> {{optionsFrom}}<br/>
-                <b>To:</b> {{optionsTo}}<br/> 
-                <b>Time to Station:</b> {{optionsTimeToStation}}<br/>-->
               </p>
               <div class="well">
                 Next connection in <b>{{nextConnText}}</b> ({{nextConnection.from.departure | date:'dd.MM.yyyy: HH:mm'}}) with <b><span product-list products="nextConnection.products"></span></b> and takes <b>{{nextConnection.duration | duration}}</b>
@@ -39,7 +33,7 @@
                   <th>Duration</th>
                 </thead>
                 <tbody>
-                  <tr ng-repeat="connection in localConnections track by $index"  ng-class="{'warning' : connection.products.length > 1}" >
+                  <tr ng-repeat="connection in localConnections track by $index"  ng-class="{'danger' : isBeforeNow(connection.from.departure)}" >
                     <td>{{connection.from.departure| date:'HH:mm'}}</td>
                     <td><span product-list products="connection.products"></span></td>
                     <td>{{connection.duration | duration }}</td>

@@ -37,24 +37,22 @@ nextTramApp.controller("PageController", function ($scope, $timeout, OpenDataSer
         $scope.selectedConnectionID = options.selectedConnectionID;
         if($scope.selectedConnectionID != null){
             var selectedConnection = _.findWhere(options.connections, {id: options.selectedConnectionID});
-            $scope.optionsFrom = selectedConnection.from;
-            $scope.optionsTo = selectedConnection.to;
-            $scope.optionsTimeToStation = selectedConnection.timeToStation + ' minutes';
+            $scope.selectedConnection = selectedConnection;
         }
     });
 
-    $scope.formatDuration = function(durationString){
-        
+    $scope.isBeforeNow = function(dateTime){
+        var dateToCompare = moment().add($scope.selectedConnection.timeToStation, 'minutes');
+        return moment(dateTime).isBefore(dateToCompare);
     }
 
     $scope.showConnections = function(){
         
         //Read config
     	OptionsService.getOptions().then(function(options){
-            //console.log('got options', options);
             if(options != undefined){
                 $scope.setupRequired = false;
-                
+                $scope.connections = options.connections;
                 var nextConnection = TimeTableService.getNextConnection();
                 $scope.localConnections = TimeTableService.getLocalConnections();
                 $scope.nextConnection = nextConnection;
@@ -63,9 +61,9 @@ nextTramApp.controller("PageController", function ($scope, $timeout, OpenDataSer
             }else{
                 $scope.setupRequired = true;
             }
-
-            $timeout($scope.showConnections,1000);
         });
+        
+        $timeout($scope.showConnections,1000);
     };
 
     $scope.showConnections();
