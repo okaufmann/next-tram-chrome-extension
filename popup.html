@@ -39,7 +39,7 @@
                   <th>Duration</th>
                 </thead>
                 <tbody>
-                  <tr ng-repeat="connection in localConnections track by $index">
+                  <tr ng-repeat="connection in localConnections track by $index"  ng-class="{'warning' : connection.products.length > 1}" >
                     <td>{{connection.from.departure| date:'HH:mm'}}</td>
                     <td><span product-list products="connection.products"></span></td>
                     <td>{{connection.duration | duration }}</td>

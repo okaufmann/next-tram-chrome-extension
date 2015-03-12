@@ -10,14 +10,12 @@ var onInstall = function(details) {
 
     if(details.reason = "install"){
         console.log("first install");
-        //alert("thx for installing Next Tram!");
         chrome.tabs.create({url: "options.html"});
         localStorage.clear();
     } 
     else if(details.reason = "update") {
         //chrome.browserAction.setBadgeText({"text" :"New" }); // tell the user  
         console.log("new version installed:", id);
-        //alert("Next Tram successfully updated.");
         extensions[id] = details; // track the extension
         localStorage.clear();
     }
@@ -72,32 +70,33 @@ nextTramBackgroundApp.controller("BackgroundController", function ($scope, $time
                         var departureAt = $filter('date')(nextConnection.from.departure, "dd.MM.yyyy HH:mm");
 
                         var firstSection = nextConnection.sections[0];
-                        //var sectionCategory = firstSection.journey.name.replace(firstSection.journey.number, "").trim();
 
                         var leaveIn = (departuereIn - selectedConnection.timeToStation);
 
                         if(leaveIn > 10){
                             badge_color.color = "#04B404"; //green
+                            badge.text = leaveIn + '';
                         }else if(leaveIn > 0){
                             badge_color.color = "#DF3A01"; // orange
+                            badge.text = leaveIn + '';
                         }else if(leaveIn == 0){
-                            leaveIn = 'now';
                             badge_color.color = "#FF0000"; //red
+                            badge.text = 'now';
                         }else{
-                            leaveIn = 'missed';
                             badge_color.color = "#FF0000"; //red
+                            badge.text = 'miss';
                         }
 
                         icon.path = 'images/icon.png';
 
-                        if(leaveIn >= 0){
+                        if(leaveIn > 0){
                             title.title = 'You have to leave in ' + leaveIn + ' minutes to catch the next connection';
+                        }else if(leaveIn == 0){
+                            title.title = 'You have to leave now minutes to catch the next connection';
                         }else{
                             title.title = 'You missed the connection, wait for the next one...';
                         }
                         
-                        badge.text = leaveIn + '';
-
                         chrome.browserAction.setBadgeBackgroundColor(badge_color);
                         chrome.browserAction.setBadgeText(badge);
                         chrome.browserAction.setTitle(title);
