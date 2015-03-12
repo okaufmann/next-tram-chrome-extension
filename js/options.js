@@ -16,7 +16,9 @@ nextTramOptionsApp.controller("OptionsController", function ($scope, $timeout, $
 	$scope.loadingLocations = false;
 
 	var showNotification = function(text, type){
+		console.log(type);
 		type = type || 'info';
+
 		new PNotify({
 		    title: 'Information',
 		    text: text,
@@ -26,7 +28,7 @@ nextTramOptionsApp.controller("OptionsController", function ($scope, $timeout, $
 	            nonblock_opacity: .2
 	        },
 	        //animate_speed: 'fast',
-		    type: 'info',
+		    type: type,
 		    addclass: "stack-bottomright",
 		    stack: stack_bottomright
 		});
@@ -37,24 +39,23 @@ nextTramOptionsApp.controller("OptionsController", function ($scope, $timeout, $
 		console.log($scope.lastEditIndex);
 		if($scope.connection.id == null || $scope.connection.id == undefined){
 			OptionsService.addConnection($scope.connection).then(function(options){
-				console.log("saved connection successfully", options.connections);
+				console.log("connection successfully created", options.connections);
 				$scope.options = options;
 				$scope.connection = {};
-				showNotification('saved connection successfully','success');
-				
+				showNotification('connection successfully created','success');
 			}).catch(function(reason){
 				console.log("error saving connection", reason);
-				showNotification('error saving connection','error');
+				showNotification('error creating connection','error');
 			});
 		}else{
 			OptionsService.setConnection($scope.lastEditIndex, $scope.connection).then(function(options){
-				console.log("saved (edited) connection successfully", options);
+				console.log("connection successfully saved", options);
 				$scope.options = options;
 				$scope.connection = {};
-				alert("saved (edited) connection successfully");
+				showNotification('connection successfully saved', 'success');
 			}).catch(function(reason){
 				console.log("error saving connection", reason);
-				alert("error saving connection");
+				showNotification('error saving connection', 'error');
 			});
 			$scope.form_show = false;
 		}
