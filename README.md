@@ -36,3 +36,7 @@ Or download latest source from [here](https://github.com/mighty-code/next-tram-c
 
 [![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/mighty-code/next-tram-chrome-extension/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
 
+
+
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/mighty-code/next-tram-chrome-extension/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+
